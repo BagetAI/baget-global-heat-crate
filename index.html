@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Heat Crate - Rare & Exotic Hot Sauce Subscription</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #fff4e6;
+      color: #4a2c0a;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #bf360c;
+      padding: 1rem 2rem;
+      color: #fff;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 6px rgb(191 54 12 / 0.3);
+    }
+    main {
+      flex-grow: 1;
+      padding: 1rem 1rem 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    p.lead {
+      font-size: 1.25rem;
+      margin: 0 0 1.5rem;
+      color: #7a4a1f;
+    }
+    section.description {
+      background: #fff3e0;
+      padding: 1.5rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgb(191 54 12 / 0.15);
+    }
+    section.subscription-options {
+      margin-bottom: 2rem;
+    }
+    .option {
+      background: #ff6f00;
+      color: white;
+      padding: 1rem 1.5rem;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.3s ease;
+    }
+    .option:hover, .option.selected {
+      background: #e65100;
+    }
+    form {
+      background: #fff3e0;
+      padding: 1.5rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(191 54 12 / 0.15);
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #5d3100;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      border: 1px solid #d47f09;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      background-color: #bf360c;
+      color: white;
+      padding: 0.75rem 1rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover:enabled {
+      background-color: #a32a07;
+    }
+    .success-message {
+      color: #2e7d32;
+      font-weight: 700;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #7a4a1f;
+    }
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      main {
+        padding: 1rem 0.75rem 2rem;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    GLOBAL HEAT CRATE
+  </header>
+  <main>
+    <h1>Discover Rare & Exotic Hot Sauces from Around the World</h1>
+    <p class="lead">A curated subscription box delivering the hottest, rarest, and most flavorful hot sauces right to your door monthly.</p>
+    <section class="description">
+      <p>Global Heat Crate brings you a fiery adventure with handpicked exotic hot sauces sourced globally. Each month receive 4-6 unique bottles featuring ultra-hot, smoky, fruity, and savory flavors that you won’t find in your local store. Spice up your meals and taste culture from every continent.</p>
+    </section>
+    <section class="subscription-options">
+      <div class="option" data-subscription="monthly">Monthly Subscription - $25/month</div>
+      <div class="option" data-subscription="3-month">3-Month Subscription - $70 (save $5)</div>
+      <div class="option" data-subscription="6-month">6-Month Subscription - $130 (save $20)</div>
+>
+    </section>
+    <form id="email-form">
+      <label for="email">Join the waitlist & get exclusive launch offers:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+      <button type="submit">Notify Me</button>
+      <p class="success-message" id="success-message" style="display:none;">Thank you for joining the waitlist!</p>
+    </form>
+  </main>
+  <footer>
+    &copy; 2024 Global Heat Crate
+  </footer>
+
+  <script>
+    const options = document.querySelectorAll('.subscription-options .option');
+    let selected = null;
+
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        if (selected) selected.classList.remove('selected');
+        option.classList.add('selected');
+        selected = option;
+      });
+    });
+
+    const form = document.getElementById('email-form');
+    const successMessage = document.getElementById('success-message');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const emailInput = form.email.value.trim();
+
+      if (!selected) {
+        alert('Please select a subscription option first.');
+        return;
+      }
+
+      if (emailInput === '') {
+        alert('Please enter your email.');
+        return;
+      }
+
+      // Simulate API call to save email and subscription preference
+      form.email.disabled = true;
+      form.querySelector('button').disabled = true;
+
+      setTimeout(() => {
+        form.reset();
+        if (selected) selected.classList.remove('selected');
+        form.email.disabled = false;
+        form.querySelector('button').disabled = false;
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 5000);
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
